@@ -1,0 +1,140 @@
+# Adapted from:
+# http://docs.rancher.com/rancher/installing-rancher/installing-server/basic-ssl-config/
+# http://port.us.org/docs/setups/3_nginx_bare_metal.html
+# https://weakdh.org/sysadmin.html
+# https://wiki.mozilla.org/Security/Server_Side_TLS
+# https://cipherli.st/
+
+daemon off;
+user nginx nginx;
+worker_processes 2;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  include       mime.types;
+  default_type  application/octet-stream;
+  charset       UTF-8;
+
+  # Some basic config.
+  server_tokens off;
+  sendfile      on;
+  tcp_nopush    on;
+  tcp_nodelay   on;
+
+  gzip on;
+
+  # On timeouts.
+  keepalive_timeout     65;
+  client_header_timeout 240;
+  client_body_timeout   240;
+  fastcgi_read_timeout  249;
+  reset_timedout_connection on;
+
+  log_format upstreamlog '[$time_local] $remote_addr - $remote_user - $server_name - $http_user_agent - ( $request_body ) to: $upstream_addr: $request upstream_response_time $upstream_response_time msec $msec request_time $request_time';
+
+  upstream rancher {
+    server rancher:8080 max_fails=10 fail_timeout=15s;
+  }
+
+  server {
+    listen 80;
+    server_name ${RANCHER_FQDN};
+    return 301 https://${RANCHER_FQDN}$request_uri;
+  }
+
+  server {
+    listen 443 ssl;
+    server_name ${RANCHER_FQDN};
+
+    # SSL
+    ssl on;
+
+    # Certificates
+    ssl_certificate /certs/fullchain.pem;
+    ssl_certificate_key /certs/privkey.pem;
+
+    # Enable session resumption to improve https performance
+    #
+    # http://vincent.bernat.im/en/blog/2011-ssl-session-reuse-rfc5077.html
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    # Enables server-side protection from BEAST attacks
+    # http://blog.ivanristic.com/2013/09/is-beast-still-a-threat.html
+    ssl_prefer_server_ciphers on;
+
+    # Disable SSLv3 (enabled by default since nginx 0.8.19)
+    # since it's less secure than TLS
+    # http://en.wikipedia.org/wiki/Secure_Sockets_Layer#SSL_3.0
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    # From: https://cipherli.st/
+    ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+    ssl_ecdh_curve secp384r1;
+    ssl_session_tickets off;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    resolver 172.20.0.11 8.8.8.8 valid=300s;
+    resolver_timeout 5s;
+
+    ssl_dhparam /certs/dhparams.pem;
+
+    # Log
+    access_log /var/log/nginx/access.log upstreamlog;
+    error_log /var/log/nginx/error.log;
+
+    # disable any limits to avoid HTTP 413 for large image uploads
+    client_max_body_size 0;
+
+    # required to avoid HTTP 411: see Issue #1486
+    # (https://github.com/docker/docker/issues/1486)
+    chunked_transfer_encoding on;
+
+    # Custom headers.
+
+    # Adding HSTS[1] (HTTP Strict Transport Security) to avoid SSL stripping[2].
+    #
+    # [1] https://developer.mozilla.org/en-US/docs/Security/HTTP_Strict_Transport_Security
+    # [2] https://en.wikipedia.org/wiki/SSL_stripping#SSL_stripping
+    # [3] https://cipherli.st/
+    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
+
+    # Don't allow the browser to render the page inside a frame or iframe
+    # and avoid Clickjacking. More in the following link:
+    #
+    # https://developer.mozilla.org/en-US/docs/HTTP/X-Frame-Options
+    add_header X-Frame-Options DENY;
+
+    # Disable content-type sniffing on some browsers.
+    add_header X-Content-Type-Options nosniff;
+
+    # This header enables the Cross-site scripting (XSS) filter built into
+    # most recent web browsers. It's usually enabled by default anyway, so the
+    # role of this header is to re-enable the filter for this particular
+    # website if it was disabled by the user.
+    add_header X-XSS-Protection "1; mode=block";
+
+    # Location
+    location / {
+      proxy_pass http://rancher;
+      proxy_http_version 1.1;
+      proxy_set_header Host $host;
+      proxy_set_header X-Scheme $scheme;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Host $host;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-Port $server_port;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_buffering on;
+      # This allows the ability for the execute shell window to remain open for up to 15 minutes.
+      # Without this parameter, the default is 1 minute and will automatically close.
+      proxy_read_timeout 900s;
+      auth_basic off;
+    }
+  }
+}

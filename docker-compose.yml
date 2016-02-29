@@ -2,7 +2,7 @@ web:
   image: nginx:1.9.10
   container_name: rancher-web
   restart: always
-  command: sh -c "sed -e s/\$${RANCHER_FQDN}/$${RANCHER_ENV_RANCHER_FQDN}/g /nginx.conf.tpl > /etc/nginx/nginx.conf; exec nginx"
+  command: sh -c "sed -e s/\$${RANCHER_FQDN}/$${RANCHER_FQDN}/g /nginx.conf.tpl > /etc/nginx/nginx.conf; exec nginx"
   volumes:
     - ./nginx.conf.tpl:/nginx.conf.tpl:ro
     - /certs:/certs:ro
@@ -11,6 +11,7 @@ web:
   ports:
     - "80:80"
     - "443:443"
+  env_file: ./rancher.env
 
 rancher:
   image: rancher/server:v0.56.1
@@ -22,7 +23,9 @@ rancher:
     - /certs/cert.pem:/ca.crt:ro
   links:
     - db
-  env_file: ./rancher.env
+  env_file:
+    - ./rancher.env
+    - ./database.env
 
 rancher-data:
   image: rancher/server:v0.56.1
@@ -41,7 +44,7 @@ db:
     - ./init.sh:/docker-entrypoint-initdb.d/init.sh:ro
   environment:
     MYSQL_RANDOM_ROOT_PASSWORD: 1
-  env_file: ./rancher.env
+  env_file: ./database.env
 
 db-data:
   image: mariadb:10.1.11

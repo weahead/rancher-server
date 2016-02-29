@@ -13,7 +13,7 @@ web:
   env_file: ./rancher.env
 
 rancher:
-  image: rancher/server:v0.56.1
+  image: rancher/server:v0.59.1
   container_name: rancher
   restart: always
   volumes_from:
@@ -27,7 +27,7 @@ rancher:
     - ./database.env
 
 rancher-data:
-  image: rancher/server:v0.56.1
+  image: rancher/server:v0.59.1
   container_name: rancher-data
   entrypoint: /bin/echo
   command: "Data rancher"

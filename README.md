@@ -1,14 +1,15 @@
 # We ahead's Rancher setup
 
-[![Latest release](https://img.shields.io/badge/latest-v1.0.0-green.svg)](https://github.com/weahead/rancher-server/releases/tag/v1.0.0)
-[![Rancher v0.56.1](https://img.shields.io/badge/rancher-v0.56.1-green.svg)](https://github.com/rancher/rancher/releases/tag/v0.56.1)
-[![nginx 1.9.10](https://img.shields.io/badge/nginx-1.9.10-green.svg)]()
-[![MariaDB 10.1.11](https://img.shields.io/badge/mariadb-10.1.11-green.svg)]()
+[![Latest release](https://img.shields.io/badge/latest-v2.0.0-green.svg)](https://github.com/weahead/rancher-server/releases/tag/v2.0.0)
+[![Rancher v0.59.1](https://img.shields.io/badge/rancher-v0.59.1-green.svg)](https://github.com/rancher/rancher/releases/tag/v0.59.1)
+[![nginx 1.9.11](https://img.shields.io/badge/nginx-1.9.11-green.svg)]()
+[![MariaDB 10.1.12](https://img.shields.io/badge/mariadb-10.1.12-green.svg)]()
+
 
 ## Requirements
 
-- [Docker Engine](https://www.docker.com/products/docker-engine)
-- [Docker Compose](https://www.docker.com/products/docker-compose)
+- [Docker Engine 1.10.0+](https://www.docker.com/products/docker-engine)
+- [Docker Compose 1.6.0+](https://www.docker.com/products/docker-compose)
 - Valid SSL certificates from a CA for the domain Rancher will be available at.
 - Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits. Generate
   with `openssl dhparam -out dhparams.pem 2048`.

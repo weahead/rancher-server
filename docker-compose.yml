@@ -1,53 +1,42 @@
-web:
-  image: nginx:1.9.10
-  container_name: rancher-web
-  restart: always
-  command: sh -c "sed -e s/\$${RANCHER_FQDN}/$${RANCHER_FQDN}/g /nginx.conf.tpl > /etc/nginx/nginx.conf; exec nginx"
-  volumes:
-    - ./nginx.conf.tpl:/nginx.conf.tpl:ro
-    - /certs:/certs:ro
-  links:
-    - rancher
-  ports:
-    - "80:80"
-    - "443:443"
-  env_file: ./rancher.env
+version: '2'
 
-rancher:
-  image: rancher/server:v0.56.1
-  container_name: rancher
-  restart: always
-  volumes_from:
-    - rancher-data
-  volumes:
-    - /certs/cert.pem:/ca.crt:ro
-  links:
-    - db
-  env_file:
-    - ./rancher.env
-    - ./database.env
+services:
+  web:
+    image: nginx:1.9.11
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /certs:/certs:ro
+    links:
+      - rancher
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file: ./rancher.env
 
-rancher-data:
-  image: rancher/server:v0.56.1
-  container_name: rancher-data
-  entrypoint: /bin/echo
-  command: "Data rancher"
+  rancher:
+    image: rancher/server:v0.59.1
+    restart: always
+    volumes:
+      - rancher-data:/var/lib/cattle
+      - /certs/cert.pem:/ca.crt:ro
+    links:
+      - db
+    env_file:
+      - ./rancher.env
+      - ./database.env
 
-db:
-  image: mariadb:10.1.11
-  container_name: rancher-db
-  restart: always
-  volumes_from:
-    - db-data
-  volumes:
-    - ./rancher.cnf:/etc/mysql/conf.d/rancher.cnf:ro
-    - ./init.sh:/docker-entrypoint-initdb.d/init.sh:ro
-  environment:
-    MYSQL_RANDOM_ROOT_PASSWORD: 1
-  env_file: ./database.env
+  db:
+    image: mariadb:10.1.12
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./rancher.cnf:/etc/mysql/conf.d/rancher.cnf:ro
+      - ./init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    env_file: ./database.env
 
-db-data:
-  image: mariadb:10.1.11
-  container_name: rancher-db-data
-  entrypoint: /bin/echo
-  command: "Data db"
+volumes:
+  rancher-data: {}
+  db-data: {}

@@ -7,13 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Upgrade nginx from 1.9.10 to 1.9.11
 - Upgrade MariaDB from 10.1.11 to 10.1.12
+- Upgrade Rancher from v0.56.1 to v0.59.1
 
 
 ### Versions
 
 | Name    | Version |
 | ------- | ------- |
-| Rancher | v0.56.1 |
+| Rancher | v0.59.1 |
 | nginx   | 1.9.11  |
 | MariaDB | 10.1.12 |
 

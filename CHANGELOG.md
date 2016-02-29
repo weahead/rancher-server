@@ -1,9 +1,18 @@
 # Change Log
+
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [Unreleased]
+
+Nothing.
+
+
+## 2.0.0 - 2016-03-01 \[ [zip](https://github.com/weahead/rancher-server/archive/v2.0.0.zip) / [tar](https://github.com/weahead/rancher-server/archive/v2.0.0.tar.gz) \]
+
+
+### Changed
 
 - **Upgraded to Docker Compose format version 2. Project now requires Docker
   Engine 1.10.0+ and Docker Compose 1.6.0+.**
@@ -38,4 +47,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 | MariaDB | 10.1.11 |
 
 
-[Unreleased]: https://github.com/weahead/rancher-server/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/weahead/rancher-server/compare/v2.0.0...HEAD

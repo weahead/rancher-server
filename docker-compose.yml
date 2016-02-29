@@ -33,7 +33,7 @@ rancher-data:
   command: "Data rancher"
 
 db:
-  image: mariadb:10.1.11
+  image: mariadb:10.1.12
   container_name: rancher-db
   restart: always
   volumes_from:
@@ -46,7 +46,7 @@ db:
   env_file: ./database.env
 
 db-data:
-  image: mariadb:10.1.11
+  image: mariadb:10.1.12
   container_name: rancher-db-data
   entrypoint: /bin/echo
   command: "Data db"

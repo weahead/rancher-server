@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 - Upgrade nginx from 1.9.10 to 1.9.11
+- Upgrade MariaDB from 10.1.11 to 10.1.12
 
 
 ### Versions
@@ -14,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 | ------- | ------- |
 | Rancher | v0.56.1 |
 | nginx   | 1.9.11  |
-| MariaDB | 10.1.11 |
+| MariaDB | 10.1.12 |
 
 
 ## 1.0.0 - 2016-02-01 \[ [zip](https://github.com/weahead/rancher-server/archive/v1.0.0.zip) / [tar](https://github.com/weahead/rancher-server/archive/v1.0.0.tar.gz) \]

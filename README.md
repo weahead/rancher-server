@@ -7,8 +7,8 @@
 
 ## Requirements
 
-- [Docker Engine](https://www.docker.com/products/docker-engine)
-- [Docker Compose](https://www.docker.com/products/docker-compose)
+- [Docker Engine 1.10.0+](https://www.docker.com/products/docker-engine)
+- [Docker Compose 1.6.0+](https://www.docker.com/products/docker-compose)
 - Valid SSL certificates from a CA for the domain Rancher will be available at.
 - Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits. Generate
   with `openssl dhparam -out dhparams.pem 2048`.

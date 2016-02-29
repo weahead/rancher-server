@@ -5,9 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- Upgrade nginx from 1.9.10 to 1.9.11
-- Upgrade MariaDB from 10.1.11 to 10.1.12
-- Upgrade Rancher from v0.56.1 to v0.59.1
+- **Upgraded to Docker Compose format version 2. Project now requires Docker
+  Engine 1.10.0+ and Docker Compose 1.6.0+.**
+- Upgrade nginx from `1.9.10` to `1.9.11`
+- Upgrade MariaDB from `10.1.11` to `10.1.12`
+- Upgrade Rancher from `v0.56.1` to `v0.59.1`
 
 
 ### Versions

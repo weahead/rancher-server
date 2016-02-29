@@ -1,5 +1,5 @@
 web:
-  image: nginx:1.9.10
+  image: nginx:1.9.11
   container_name: rancher-web
   restart: always
   volumes:

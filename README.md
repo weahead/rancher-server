@@ -2,7 +2,7 @@
 
 [![Latest release](https://img.shields.io/badge/latest-v2.0.0-green.svg)](https://github.com/weahead/rancher-server/releases/tag/v2.0.0)
 [![Rancher v0.59.1](https://img.shields.io/badge/rancher-v0.59.1-green.svg)](https://github.com/rancher/rancher/releases/tag/v0.59.1)
-[![nginx 1.9.11](https://img.shields.io/badge/nginx-1.9.11-green.svg)]()
+[![nginx 1.9.12](https://img.shields.io/badge/nginx-1.9.12-green.svg)]()
 [![MariaDB 10.1.12](https://img.shields.io/badge/mariadb-10.1.12-green.svg)]()
 
 

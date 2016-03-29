@@ -15,7 +15,7 @@ services:
     env_file: ./rancher.env
 
   rancher:
-    image: rancher/server:v0.59.1
+    image: rancher/server:v1.0.0
     restart: unless-stopped
     volumes:
       - rancher-data:/var/lib/cattle

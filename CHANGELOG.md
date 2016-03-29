@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased](https://github.com/weahead/rancher-server/compare/v2.0.0...HEAD)
+## [Unreleased](https://github.com/weahead/rancher-server/compare/v2.1.0...HEAD)
+
+Nothing.
+
+
+## 2.1.0 - 2016-03-29 \[ [zip](https://github.com/weahead/rancher-server/archive/v2.1.0.zip) / [tar](https://github.com/weahead/rancher-server/archive/v2.1.0.tar.gz) \]
 
 
 ### Changed

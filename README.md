@@ -1,7 +1,7 @@
 # We ahead's Rancher setup
 
-[![Latest release](https://img.shields.io/badge/latest-v2.1.0-green.svg)](https://github.com/weahead/rancher-server/releases/tag/v2.1.0)
-[![Rancher v1.1.1](https://img.shields.io/badge/rancher-v1.1.1-green.svg)](https://github.com/rancher/rancher/releases/tag/v1.1.1)
+[![Latest release](https://img.shields.io/badge/latest-v2.3.2-green.svg)](https://github.com/weahead/rancher-server/releases/tag/v2.3.2)
+[![Rancher v1.1.2](https://img.shields.io/badge/rancher-v1.1.2-green.svg)](https://github.com/rancher/rancher/releases/tag/v1.1.2)
 [![nginx 1.9.12](https://img.shields.io/badge/nginx-1.9.12-green.svg)]()
 [![MariaDB 10.1.12](https://img.shields.io/badge/mariadb-10.1.12-green.svg)]()
 

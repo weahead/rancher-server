@@ -2,7 +2,7 @@ version: '2'
 
 services:
   web:
-    image: nginx:1.9.12
+    image: nginx:1.11.6-alpine
     restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
@@ -15,7 +15,7 @@ services:
     env_file: ./rancher.env
 
   rancher:
-    image: rancher/server:v1.1.2
+    image: rancher/server:v1.2.0
     restart: unless-stopped
     volumes:
       - rancher-data:/var/lib/cattle
@@ -27,7 +27,7 @@ services:
       - ./database.env
 
   db:
-    image: mariadb:10.1.12
+    image: mariadb:10.1.19
     restart: unless-stopped
     volumes:
       - db-data:/var/lib/mysql

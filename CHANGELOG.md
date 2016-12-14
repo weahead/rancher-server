@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Upgrade Rancher from `v1.1.2` to `v1.2.0`
+- Upgrade nginx from `1.9.12` to `1.11.6`. Now using Alpine based image.
 
 
 ### Versions
@@ -16,7 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 | Name    | Version |
 | ------- | ------- |
 | Rancher | v1.2.0  |
-| nginx   | 1.9.12  |
+| nginx   | 1.11.6  |
 | MariaDB | 10.1.12 |
 
 

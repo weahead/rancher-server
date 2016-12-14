@@ -27,7 +27,7 @@ services:
       - ./database.env
 
   db:
-    image: mariadb:10.1.12
+    image: mariadb:10.1.19
     restart: unless-stopped
     volumes:
       - db-data:/var/lib/mysql

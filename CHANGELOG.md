@@ -6,7 +6,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/weahead/rancher-server/compare/v2.3.2...HEAD)
 
-Nothing.
+### Changed
+
+- Upgrade Rancher from `v1.1.2` to `v1.2.0`
+
+
+### Versions
+
+| Name    | Version |
+| ------- | ------- |
+| Rancher | v1.2.0  |
+| nginx   | 1.9.12  |
+| MariaDB | 10.1.12 |
 
 
 ## 2.3.2 - 2016-08-15 \[ [zip](https://github.com/weahead/rancher-server/archive/v2.3.2.zip) / [tar](https://github.com/weahead/rancher-server/archive/v2.3.2.tar.gz) \]
